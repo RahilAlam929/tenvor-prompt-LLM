@@ -39,3 +39,12 @@ training/checkpoints/
 # Keep Tenvor training datasets versioned
 !training/data/
 !training/data/**
+
+# Tenvor training environment
+training/.venv/
+training/__pycache__/
+training/**/__pycache__/
+training/checkpoints/
+training/data/*.backup.txt
+training/backups/
+.DS_Store

@@ -1,62 +1,63 @@
 import torch
 import torch.nn as nn
-from torch.nn import functional as F
 
 
-class Block(nn.Module):
-    def __init__(self, n_embd, n_head, dropout=0.1):
+class CausalSelfAttention(nn.Module):
+    def __init__(self, dim, heads):
         super().__init__()
-        self.attn = nn.MultiheadAttention(
-            n_embd, n_head, dropout=dropout, batch_first=True
+        self.attention = nn.MultiheadAttention(
+            dim, heads, batch_first=True
         )
-        self.norm1 = nn.LayerNorm(n_embd)
-        self.norm2 = nn.LayerNorm(n_embd)
-        self.ff = nn.Sequential(
-            nn.Linear(n_embd, 4 * n_embd),
-            nn.GELU(),
-            nn.Linear(4 * n_embd, n_embd),
-            nn.Dropout(dropout),
+        self.register_buffer(
+            "mask",
+            torch.triu(torch.ones(128, 128, dtype=torch.bool), diagonal=1),
+            persistent=False,
         )
 
     def forward(self, x):
-        n = x.size(1)
-        mask = torch.triu(
-            torch.ones(n, n, dtype=torch.bool, device=x.device),
-            diagonal=1,
-        )
-        attention, _ = self.attn(
+        length = x.size(1)
+        mask = self.mask[:length, :length]
+        output, _ = self.attention(
             x, x, x, attn_mask=mask, need_weights=False
         )
-        x = self.norm1(x + attention)
-        return self.norm2(x + self.ff(x))
+        return output
 
 
-class TenvorGPT(nn.Module):
-    def __init__(self, vocab_size, block_size, n_embd, n_head, n_layer):
+class TransformerBlock(nn.Module):
+    def __init__(self, dim, heads):
         super().__init__()
-        self.block_size = block_size
-        self.token_emb = nn.Embedding(vocab_size, n_embd)
-        self.pos_emb = nn.Embedding(block_size, n_embd)
-        self.blocks = nn.Sequential(
-            *[Block(n_embd, n_head) for _ in range(n_layer)]
+        self.norm1 = nn.LayerNorm(dim)
+        self.attention = CausalSelfAttention(dim, heads)
+        self.norm2 = nn.LayerNorm(dim)
+        self.feed_forward = nn.Sequential(
+            nn.Linear(dim, dim * 4),
+            nn.GELU(),
+            nn.Linear(dim * 4, dim),
         )
-        self.norm = nn.LayerNorm(n_embd)
-        self.head = nn.Linear(n_embd, vocab_size)
 
-    def forward(self, idx):
-        idx = idx[:, -self.block_size:]
-        positions = torch.arange(idx.size(1), device=idx.device)
-        x = self.token_emb(idx) + self.pos_emb(positions)
-        return self.head(self.norm(self.blocks(x)))
+    def forward(self, x):
+        x = x + self.attention(self.norm1(x))
+        x = x + self.feed_forward(self.norm2(x))
+        return x
 
-    @torch.no_grad()
-    def generate(self, idx, count=200, temperature=0.8):
-        self.eval()
 
-        for _ in range(count):
-            logits = self(idx)[:, -1, :] / max(temperature, 0.01)
-            probs = F.softmax(logits, dim=-1)
-            next_token = torch.multinomial(probs, num_samples=1)
-            idx = torch.cat([idx, next_token], dim=1)
+class TenvorLM(nn.Module):
+    def __init__(self, vocab_size, dim=64, heads=4, layers=2, max_length=128):
+        super().__init__()
+        self.token_embedding = nn.Embedding(vocab_size, dim)
+        self.position_embedding = nn.Embedding(max_length, dim)
+        self.blocks = nn.ModuleList(
+            [TransformerBlock(dim, heads) for _ in range(layers)]
+        )
+        self.norm = nn.LayerNorm(dim)
+        self.output = nn.Linear(dim, vocab_size, bias=False)
+        self.output.weight = self.token_embedding.weight
+        self.max_length = max_length
 
-        return idx
+    def forward(self, token_ids):
+        batch, length = token_ids.shape
+        positions = torch.arange(length, device=token_ids.device)
+        x = self.token_embedding(token_ids) + self.position_embedding(positions)
+        for block in self.blocks:
+            x = block(x)
+        return self.output(self.norm(x))

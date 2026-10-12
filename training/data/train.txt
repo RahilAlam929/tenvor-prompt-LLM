@@ -1,68 +1,43 @@
-Machine Learning is a field of artificial intelligence that learns patterns from data.
-Supervised learning uses labeled examples for training.
-Unsupervised learning discovers patterns in unlabeled data.
-Classification predicts discrete categories.
-Regression predicts continuous numerical values.
-Overfitting occurs when a model performs well on training data but poorly on unseen data.
-Regularization helps reduce overfitting by penalizing model complexity.
-L1 regularization uses the absolute values of model weights.
-L2 regularization uses the squared values of model weights.
-Gradient descent updates model parameters to reduce the loss function.
-The learning rate controls the size of each gradient descent update.
-Bagging trains models on different samples and combines their predictions.
-Boosting trains models sequentially to improve errors made by earlier models.
-A neural network contains layers of interconnected computational units.
-A transformer uses attention mechanisms to model relationships between tokens.
-An embedding represents discrete tokens as numerical vectors.
-A tokenizer converts text into tokens.
-A language model learns to predict the next token in a sequence.
-Python is a popular programming language for machine learning.
-FastAPI is a Python framework for building HTTP APIs.
-Testing evaluates whether a trained model generalizes to unseen examples.
-
-Machine learning models learn patterns from examples and use those patterns to make predictions.
-A dataset contains examples and features used to train and evaluate a machine learning model.
-A feature is an input variable used by a predictive model.
-A label is the target value that a supervised learning model tries to predict.
-Training data is used to optimize the parameters of a model.
-Validation data is used to compare model configurations during development.
-Test data is used to estimate performance on unseen examples.
-Classification is a supervised learning task that predicts a category.
-Regression is a supervised learning task that predicts a numerical value.
-Linear regression predicts a target using a weighted combination of input features.
-Logistic regression estimates probabilities for classification tasks.
-A decision tree makes predictions using a sequence of feature-based decisions.
-Random forests combine predictions from multiple decision trees.
-Bagging trains models on bootstrap samples and combines their predictions.
-Boosting trains a sequence of models that improve on previous errors.
-Gradient descent updates parameters in the direction that reduces the loss.
-The gradient measures how a function changes with respect to its parameters.
-The learning rate controls the size of parameter updates.
-A loss function measures the difference between predictions and target values.
-Overfitting occurs when a model memorizes training examples and generalizes poorly.
-Underfitting occurs when a model is too simple to learn the important patterns.
-L1 regularization penalizes the sum of absolute parameter values.
-L2 regularization penalizes the sum of squared parameter values.
-Cross validation evaluates a model across multiple data splits.
-Precision is the fraction of predicted positive examples that are actually positive.
-Recall is the fraction of actual positive examples correctly identified.
-The F1 score is the harmonic mean of precision and recall.
-A confusion matrix summarizes classification predictions and actual labels.
-Neural networks learn representations through layers of parameterized transformations.
-An activation function introduces nonlinearity into a neural network.
-Backpropagation calculates gradients using the chain rule.
-An optimizer uses gradients to update model parameters.
-A transformer uses self attention to model relationships between tokens.
-An embedding maps a token to a vector of numerical values.
-A tokenizer converts text into tokens or token IDs.
-A language model learns a probability distribution over sequences of tokens.
-An autoregressive language model predicts the next token from previous tokens.
-The attention mask can prevent a decoder from looking at future tokens.
-A training checkpoint stores model parameters and other training state.
-A lower training loss does not guarantee better performance on unseen data.
-A model should be evaluated on examples that were not used for training.
-Python supports machine learning through libraries such as PyTorch and scikit-learn.
-PyTorch provides tensors, automatic differentiation, and neural network modules.
-FastAPI can expose a trained model through HTTP endpoints.
-A REST API allows software components to communicate using HTTP requests.
-A unit test checks a small piece of software against expected behavior.
+Tenvor is an experimental language model built from scratch.
+A language model predicts the next token based on previous tokens.
+Artificial intelligence enables computers to perform tasks that normally require human intelligence.
+Machine learning systems discover patterns from examples.
+Deep learning uses neural networks with multiple layers.
+A neural network contains trainable weights and mathematical operations.
+Training adjusts model weights to reduce prediction error.
+A transformer uses attention to process sequences of tokens.
+Self attention helps a token use information from earlier tokens.
+Causal language models predict future tokens without looking at them.
+Tokenization converts text into smaller units called tokens.
+Embeddings represent tokens as vectors of numbers.
+Position embeddings provide information about token order.
+The optimizer updates parameters using gradients calculated from the loss.
+Training loss measures errors on examples used during optimization.
+Validation loss measures performance on separate examples.
+A checkpoint saves model parameters for later use.
+A good experiment records settings and random seeds.
+Data quality strongly influences machine learning results.
+Small datasets can cause models to memorize examples.
+A validation set helps reveal overfitting.
+Software engineers build reliable and maintainable applications.
+Python is widely used for artificial intelligence research.
+Functions organize code into reusable units.
+Classes combine data and behavior into objects.
+Tests help developers find mistakes early.
+Git tracks changes in source code.
+A database stores information in an organized format.
+An API allows software systems to communicate.
+A server receives requests and returns responses.
+A tokenizer should be trained on representative text.
+A language model needs enough diverse examples to learn useful patterns.
+Training from scratch begins with randomly initialized model weights.
+A pretrained model has already learned patterns from another dataset.
+Tenvor does not use pretrained weights in this experiment.
+The current Tenvor model is small and educational.
+Its purpose is to demonstrate tokenization and transformer training.
+The next goal is to improve data quality and evaluation.
+Machine learning experiments should be repeatable.
+Researchers compare models using appropriate evaluation metrics.
+Lower training loss does not guarantee better performance on unseen text.
+A model can generate incorrect or meaningless sentences.
+Generated text should be evaluated rather than assumed to be correct.
