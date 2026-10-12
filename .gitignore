@@ -1,0 +1,18 @@
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+.env
+.DS_Store
+
+# Generated package metadata
+*.egg-info/
+
+# Generated prompt outputs
+final-prompt.md
+llm-prompt.md
+optimized-prompt.md
+startup-prompt.md
+
+# Local user memory and feedback
+data/
