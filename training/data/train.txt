@@ -1,0 +1,68 @@
+Machine Learning is a field of artificial intelligence that learns patterns from data.
+Supervised learning uses labeled examples for training.
+Unsupervised learning discovers patterns in unlabeled data.
+Classification predicts discrete categories.
+Regression predicts continuous numerical values.
+Overfitting occurs when a model performs well on training data but poorly on unseen data.
+Regularization helps reduce overfitting by penalizing model complexity.
+L1 regularization uses the absolute values of model weights.
+L2 regularization uses the squared values of model weights.
+Gradient descent updates model parameters to reduce the loss function.
+The learning rate controls the size of each gradient descent update.
+Bagging trains models on different samples and combines their predictions.
+Boosting trains models sequentially to improve errors made by earlier models.
+A neural network contains layers of interconnected computational units.
+A transformer uses attention mechanisms to model relationships between tokens.
+An embedding represents discrete tokens as numerical vectors.
+A tokenizer converts text into tokens.
+A language model learns to predict the next token in a sequence.
+Python is a popular programming language for machine learning.
+FastAPI is a Python framework for building HTTP APIs.
+Testing evaluates whether a trained model generalizes to unseen examples.
+
+Machine learning models learn patterns from examples and use those patterns to make predictions.
+A dataset contains examples and features used to train and evaluate a machine learning model.
+A feature is an input variable used by a predictive model.
+A label is the target value that a supervised learning model tries to predict.
+Training data is used to optimize the parameters of a model.
+Validation data is used to compare model configurations during development.
+Test data is used to estimate performance on unseen examples.
+Classification is a supervised learning task that predicts a category.
+Regression is a supervised learning task that predicts a numerical value.
+Linear regression predicts a target using a weighted combination of input features.
+Logistic regression estimates probabilities for classification tasks.
+A decision tree makes predictions using a sequence of feature-based decisions.
+Random forests combine predictions from multiple decision trees.
+Bagging trains models on bootstrap samples and combines their predictions.
+Boosting trains a sequence of models that improve on previous errors.
+Gradient descent updates parameters in the direction that reduces the loss.
+The gradient measures how a function changes with respect to its parameters.
+The learning rate controls the size of parameter updates.
+A loss function measures the difference between predictions and target values.
+Overfitting occurs when a model memorizes training examples and generalizes poorly.
+Underfitting occurs when a model is too simple to learn the important patterns.
+L1 regularization penalizes the sum of absolute parameter values.
+L2 regularization penalizes the sum of squared parameter values.
+Cross validation evaluates a model across multiple data splits.
+Precision is the fraction of predicted positive examples that are actually positive.
+Recall is the fraction of actual positive examples correctly identified.
+The F1 score is the harmonic mean of precision and recall.
+A confusion matrix summarizes classification predictions and actual labels.
+Neural networks learn representations through layers of parameterized transformations.
+An activation function introduces nonlinearity into a neural network.
+Backpropagation calculates gradients using the chain rule.
+An optimizer uses gradients to update model parameters.
+A transformer uses self attention to model relationships between tokens.
+An embedding maps a token to a vector of numerical values.
+A tokenizer converts text into tokens or token IDs.
+A language model learns a probability distribution over sequences of tokens.
+An autoregressive language model predicts the next token from previous tokens.
+The attention mask can prevent a decoder from looking at future tokens.
+A training checkpoint stores model parameters and other training state.
+A lower training loss does not guarantee better performance on unseen data.
+A model should be evaluated on examples that were not used for training.
+Python supports machine learning through libraries such as PyTorch and scikit-learn.
+PyTorch provides tensors, automatic differentiation, and neural network modules.
+FastAPI can expose a trained model through HTTP endpoints.
+A REST API allows software components to communicate using HTTP requests.
+A unit test checks a small piece of software against expected behavior.

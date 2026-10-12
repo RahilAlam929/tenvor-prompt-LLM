@@ -10,11 +10,39 @@ class LLMError(Exception):
     pass
 
 
+_tenvor_instance = None
+
+
+def get_tenvor():
+    global _tenvor_instance
+
+    if _tenvor_instance is None:
+        from training.src.inference import TenvorInference
+        _tenvor_instance = TenvorInference()
+
+    return _tenvor_instance
+
+
 def call_llm(provider, system_prompt, user_prompt, model=None):
     provider = provider.lower().strip()
 
     try:
-        if provider == "ollama":
+        if provider == "tenvor":
+            try:
+                engine = get_tenvor()
+                generated = engine.generate(
+                    user_prompt,
+                    max_new_tokens=120,
+                )
+                content = generated[len(user_prompt):].strip()
+                model = model or "tenvor-gpt"
+            except ValueError as exc:
+                raise LLMError(
+                    "TenvorGPT cannot process some characters in this prompt. "
+                    "Its character vocabulary is limited by the training data."
+                ) from exc
+
+        elif provider == "ollama":
             base_url = os.getenv(
                 "OLLAMA_BASE_URL", "http://127.0.0.1:11434"
             ).rstrip("/")
@@ -67,7 +95,7 @@ def call_llm(provider, system_prompt, user_prompt, model=None):
 
         else:
             raise LLMError(
-                "Unsupported provider. Choose 'ollama' or 'openai'."
+                "Unsupported provider. Choose 'tenvor', 'ollama', or 'openai'."
             )
 
         if not isinstance(content, str) or not content.strip():

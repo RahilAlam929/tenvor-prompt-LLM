@@ -16,3 +16,26 @@ startup-prompt.md
 
 # Local user memory and feedback
 data/
+
+# Local secrets and environment files
+.env
+.env.*
+!.env.example
+
+# Python environments and generated files
+.venv/
+__pycache__/
+*.py[cod]
+
+# Next.js generated output and local environment
+frontend/.next/
+frontend/node_modules/
+frontend/.env.local
+frontend/.env.*.local
+
+# Local model checkpoints
+training/checkpoints/
+
+# Keep Tenvor training datasets versioned
+!training/data/
+!training/data/**

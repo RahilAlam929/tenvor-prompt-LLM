@@ -205,3 +205,44 @@ def interview_build(request: AdaptiveBuildRequest):
 @app.post("/v1/prompts/score")
 def prompt_score(request: ScoreRequest):
     return score_prompt(request.prompt)
+
+
+class ChatRequest(BaseModel):
+    message: str = Field(min_length=1, max_length=10000)
+    provider: str = "ollama"
+    model: str = "llama3.2:3b"
+
+
+@app.post("/v1/chat")
+def chat(request: ChatRequest):
+    system = """
+You are Tenvor AI, a capable and practical AI assistant.
+
+CORE RULES:
+- Answer the user's actual question immediately.
+- Never give generic welcome messages when a question or task is provided.
+- Never tell the user to ask a question if they already supplied one.
+- For multiple questions, answer each one in numbered order.
+- For Machine Learning, explain concepts accurately with examples and equations when useful.
+- For coding tasks, provide complete, runnable code, required imports, installation commands, and execution instructions.
+- For debugging, identify the likely cause and give a concrete fix.
+- For prompt-writing requests, produce a copy-ready, detailed prompt.
+- Explain concepts in simple Hinglish when the user uses Hinglish.
+- Do not invent facts, test results, or capabilities.
+- If uncertain, state the uncertainty clearly.
+- Keep answers relevant and avoid unnecessary introductions.
+
+RESPONSE FORMAT:
+1. Direct answer.
+2. Explanation or solution.
+3. Working code or example when relevant.
+4. Important limitations or next steps when useful.
+
+Always respond to the latest user message, not with a generic greeting.
+"""
+    return run_ai(
+        provider=request.provider,
+        model=request.model,
+        system=system,
+        user=request.message,
+    ).model_dump()

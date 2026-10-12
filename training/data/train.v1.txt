@@ -1,0 +1,21 @@
+Machine Learning is a field of artificial intelligence that learns patterns from data.
+Supervised learning uses labeled examples for training.
+Unsupervised learning discovers patterns in unlabeled data.
+Classification predicts discrete categories.
+Regression predicts continuous numerical values.
+Overfitting occurs when a model performs well on training data but poorly on unseen data.
+Regularization helps reduce overfitting by penalizing model complexity.
+L1 regularization uses the absolute values of model weights.
+L2 regularization uses the squared values of model weights.
+Gradient descent updates model parameters to reduce the loss function.
+The learning rate controls the size of each gradient descent update.
+Bagging trains models on different samples and combines their predictions.
+Boosting trains models sequentially to improve errors made by earlier models.
+A neural network contains layers of interconnected computational units.
+A transformer uses attention mechanisms to model relationships between tokens.
+An embedding represents discrete tokens as numerical vectors.
+A tokenizer converts text into tokens.
+A language model learns to predict the next token in a sequence.
+Python is a popular programming language for machine learning.
+FastAPI is a Python framework for building HTTP APIs.
+Testing evaluates whether a trained model generalizes to unseen examples.
