@@ -26,23 +26,43 @@ model = TenvorLM(
 model.load_state_dict(checkpoint["model_state_dict"])
 model.eval()
 
-def generate(prompt, max_new_tokens=100):
+def generate(prompt, max_new_tokens=80, temperature=0.8, top_k=20):
     ids = tokenizer.encode(prompt).ids
     if not ids:
         return ""
 
-    generated = torch.tensor([ids[-model.max_length:]], dtype=torch.long)
+    generated = torch.tensor(
+        [ids[-model.max_length:]], dtype=torch.long
+    )
+    new_tokens = []
+    eos_id = tokenizer.token_to_id("[EOS]")
 
     with torch.no_grad():
         for _ in range(max_new_tokens):
             context = generated[:, -model.max_length:]
-            logits = model(context)
-            next_logits = logits[0, -1, :] / 0.8
-            probs = torch.softmax(next_logits, dim=-1)
-            next_id = torch.multinomial(probs, 1).reshape(1, 1)
-            generated = torch.cat([generated, next_id], dim=1)
+            logits = model(context)[0, -1, :].clone()
 
-    return tokenizer.decode(generated[0].tolist())
+            for token_id in set(new_tokens[-32:]):
+                logits[token_id] /= 1.2
+
+            logits /= max(temperature, 0.1)
+            k = min(top_k, logits.numel())
+            threshold = torch.topk(logits, k).values[-1]
+            logits[logits < threshold] = float("-inf")
+
+            probs = torch.softmax(logits, dim=-1)
+            next_id = torch.multinomial(probs, 1).item()
+
+            if next_id == eos_id:
+                break
+
+            new_tokens.append(next_id)
+            generated = torch.cat(
+                [generated, torch.tensor([[next_id]], dtype=torch.long)],
+                dim=1,
+            )
+
+    return tokenizer.decode(new_tokens).strip()
 
 print("Tenvor Chat | Type 'exit' to quit")
 print("Note: Experimental tiny model; responses may be nonsensical.")

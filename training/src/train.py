@@ -24,7 +24,9 @@ val_data = torch.tensor(val_ids, dtype=torch.long)
 seq_len = 64
 batch_size = 4
 steps = 300
-eval_every = 50
+eval_every = 25
+patience = 4
+min_improvement = 0.01
 
 if len(train_data) <= seq_len or len(val_data) <= seq_len:
     raise SystemExit(
@@ -42,6 +44,7 @@ model = TenvorLM(
 
 optimizer = torch.optim.AdamW(model.parameters(), lr=0.001)
 best_val_loss = float("inf")
+checks_without_improvement = 0
 
 def get_batch(source):
     starts = torch.randint(0, len(source) - seq_len, (batch_size,))
@@ -92,7 +95,7 @@ for step in range(1, steps + 1):
             f"Validation loss: {metrics['val']:.4f}"
         )
 
-        if metrics["val"] < best_val_loss:
+        if metrics["val"] < best_val_loss - min_improvement:
             best_val_loss = metrics["val"]
             torch.save(
                 {
@@ -110,7 +113,14 @@ for step in range(1, steps + 1):
                 },
                 ROOT / "checkpoints" / "tenvor-best.pt",
             )
+            checks_without_improvement = 0
             print("  Saved best checkpoint")
+        else:
+            checks_without_improvement += 1
+            print(f"  No meaningful improvement: {checks_without_improvement}/{patience}")
+            if checks_without_improvement >= patience:
+                print("Early stopping: validation loss stopped improving.")
+                break
 
 print(f"\nBest validation loss: {best_val_loss:.4f}")
 print("Checkpoint: checkpoints/tenvor-best.pt")

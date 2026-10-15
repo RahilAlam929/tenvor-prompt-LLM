@@ -1,9 +1,20 @@
-Tenvor is an experimental language model built from scratch.
-A neural network contains trainable weights and mathematical operations.
-Tokenization converts text into smaller units called tokens.
-Validation loss measures performance on separate examples.
-A validation set helps reveal overfitting.
-Tests help developers find mistakes early.
-A tokenizer should be trained on representative text.
-The current Tenvor model is small and educational.
-Lower training loss does not guarantee better performance on unseen text.
+A bicycle uses two wheels and pedals to move forward.
+A cook follows a recipe by combining ingredients in a particular order.
+Rainwater can collect in rivers, lakes, and underground reservoirs.
+A library organizes books so that readers can find useful information.
+A map represents locations and helps people plan a route.
+A gardener checks the soil before deciding how often to water plants.
+A train follows a railway track between stations.
+A calendar helps people remember appointments and important dates.
+A thermometer measures temperature.
+A telescope collects light to help people observe distant objects.
+A robot uses sensors to collect information about its surroundings.
+A sensor converts a physical measurement into a signal.
+A motor converts electrical energy into mechanical movement.
+A battery stores energy that can power an electronic device.
+A circuit connects electronic components through conductive paths.
+A compiler translates source code into another representation.
+A browser requests web resources and displays their content.
+A password manager stores credentials in an organized and protected way.
+A backup provides another copy of important files.
+A network allows computers to exchange information.
