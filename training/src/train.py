@@ -8,13 +8,18 @@ ROOT = Path(__file__).resolve().parents[1]
 torch.manual_seed(42)
 
 device = torch.device("cpu")
-tokenizer = Tokenizer.from_file(str(ROOT / "tokenizer" / "tenvor-tokenizer.json"))
-text = (ROOT / "data" / "train.txt").read_text(encoding="utf-8")
-ids = tokenizer.encode(text).ids
+tokenizer = Tokenizer.from_file(
+    str(ROOT / "tokenizer" / "tenvor-tokenizer.json")
+)
 
-split = int(len(ids) * 0.9)
-train_data = torch.tensor(ids[:split], dtype=torch.long)
-val_data = torch.tensor(ids[split:], dtype=torch.long)
+train_text = (ROOT / "data" / "train.txt").read_text(encoding="utf-8")
+val_text = (ROOT / "data" / "val.txt").read_text(encoding="utf-8")
+
+train_ids = tokenizer.encode(train_text).ids
+val_ids = tokenizer.encode(val_text).ids
+
+train_data = torch.tensor(train_ids, dtype=torch.long)
+val_data = torch.tensor(val_ids, dtype=torch.long)
 
 seq_len = 64
 batch_size = 4
@@ -22,8 +27,9 @@ steps = 300
 eval_every = 50
 
 if len(train_data) <= seq_len or len(val_data) <= seq_len:
-    raise ValueError(
-        "Dataset too short for this split. Add more text before training."
+    raise SystemExit(
+        f"Not enough tokens. Train={len(train_data)}, Val={len(val_data)}. "
+        "Add more text to the dataset before training."
     )
 
 model = TenvorLM(
@@ -46,26 +52,31 @@ def get_batch(source):
 @torch.no_grad()
 def evaluate():
     model.eval()
-    results = {}
-    for name, source in [("train", train_data), ("val", val_data)]:
+    result = {}
+
+    for name, source in (("train", train_data), ("val", val_data)):
         losses = []
         for _ in range(5):
             x, y = get_batch(source)
             logits = model(x)
             loss = F.cross_entropy(
-                logits.reshape(-1, logits.size(-1)), y.reshape(-1)
+                logits.reshape(-1, logits.size(-1)),
+                y.reshape(-1),
             )
             losses.append(loss.item())
-        results[name] = sum(losses) / len(losses)
+        result[name] = sum(losses) / len(losses)
+
     model.train()
-    return results
+    return result
 
 model.train()
+
 for step in range(1, steps + 1):
     x, y = get_batch(train_data)
     logits = model(x)
     loss = F.cross_entropy(
-        logits.reshape(-1, logits.size(-1)), y.reshape(-1)
+        logits.reshape(-1, logits.size(-1)),
+        y.reshape(-1),
     )
 
     optimizer.zero_grad()
@@ -76,26 +87,29 @@ for step in range(1, steps + 1):
     if step == 1 or step % eval_every == 0:
         metrics = evaluate()
         print(
-            f"Step {step:3d} | "
+            f"Step {step:3d}/{steps} | "
             f"Train loss: {metrics['train']:.4f} | "
             f"Validation loss: {metrics['val']:.4f}"
         )
 
         if metrics["val"] < best_val_loss:
             best_val_loss = metrics["val"]
-            torch.save({
-                "model_state_dict": model.state_dict(),
-                "vocab_size": tokenizer.get_vocab_size(),
-                "config": {
-                    "dim": 64,
-                    "heads": 4,
-                    "layers": 2,
-                    "max_length": 128,
+            torch.save(
+                {
+                    "model_state_dict": model.state_dict(),
+                    "vocab_size": tokenizer.get_vocab_size(),
+                    "config": {
+                        "dim": 64,
+                        "heads": 4,
+                        "layers": 2,
+                        "max_length": 128,
+                    },
+                    "step": step,
+                    "train_loss": metrics["train"],
+                    "val_loss": metrics["val"],
                 },
-                "step": step,
-                "train_loss": metrics["train"],
-                "val_loss": metrics["val"],
-            }, ROOT / "checkpoints" / "tenvor-best.pt")
+                ROOT / "checkpoints" / "tenvor-best.pt",
+            )
             print("  Saved best checkpoint")
 
 print(f"\nBest validation loss: {best_val_loss:.4f}")

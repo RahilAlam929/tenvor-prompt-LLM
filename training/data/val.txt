@@ -1,0 +1,9 @@
+Tenvor is an experimental language model built from scratch.
+A neural network contains trainable weights and mathematical operations.
+Tokenization converts text into smaller units called tokens.
+Validation loss measures performance on separate examples.
+A validation set helps reveal overfitting.
+Tests help developers find mistakes early.
+A tokenizer should be trained on representative text.
+The current Tenvor model is small and educational.
+Lower training loss does not guarantee better performance on unseen text.

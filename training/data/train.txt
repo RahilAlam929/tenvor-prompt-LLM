@@ -1,43 +1,34 @@
-Tenvor is an experimental language model built from scratch.
 A language model predicts the next token based on previous tokens.
 Artificial intelligence enables computers to perform tasks that normally require human intelligence.
 Machine learning systems discover patterns from examples.
 Deep learning uses neural networks with multiple layers.
-A neural network contains trainable weights and mathematical operations.
 Training adjusts model weights to reduce prediction error.
 A transformer uses attention to process sequences of tokens.
 Self attention helps a token use information from earlier tokens.
 Causal language models predict future tokens without looking at them.
-Tokenization converts text into smaller units called tokens.
 Embeddings represent tokens as vectors of numbers.
 Position embeddings provide information about token order.
 The optimizer updates parameters using gradients calculated from the loss.
 Training loss measures errors on examples used during optimization.
-Validation loss measures performance on separate examples.
 A checkpoint saves model parameters for later use.
 A good experiment records settings and random seeds.
 Data quality strongly influences machine learning results.
 Small datasets can cause models to memorize examples.
-A validation set helps reveal overfitting.
 Software engineers build reliable and maintainable applications.
 Python is widely used for artificial intelligence research.
 Functions organize code into reusable units.
 Classes combine data and behavior into objects.
-Tests help developers find mistakes early.
 Git tracks changes in source code.
 A database stores information in an organized format.
 An API allows software systems to communicate.
 A server receives requests and returns responses.
-A tokenizer should be trained on representative text.
 A language model needs enough diverse examples to learn useful patterns.
 Training from scratch begins with randomly initialized model weights.
 A pretrained model has already learned patterns from another dataset.
 Tenvor does not use pretrained weights in this experiment.
-The current Tenvor model is small and educational.
 Its purpose is to demonstrate tokenization and transformer training.
 The next goal is to improve data quality and evaluation.
 Machine learning experiments should be repeatable.
 Researchers compare models using appropriate evaluation metrics.
-Lower training loss does not guarantee better performance on unseen text.
 A model can generate incorrect or meaningless sentences.
 Generated text should be evaluated rather than assumed to be correct.
