@@ -64,25 +64,26 @@ def generate(prompt, max_new_tokens=80, temperature=0.8, top_k=20):
 
     return tokenizer.decode(new_tokens).strip()
 
-print("Tenvor Chat | Type 'exit' to quit")
-print("Note: Experimental tiny model; responses may be nonsensical.")
+if __name__ == "__main__":
+    print("Tenvor Chat | Type 'exit' to quit")
+    print("Note: Experimental tiny model; responses may be nonsensical.")
 
-while True:
-    try:
-        prompt = input("\nYou: ").strip()
-    except (EOFError, KeyboardInterrupt):
-        print("\nBye!")
-        break
+    while True:
+        try:
+            prompt = input("\nYou: ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print("\nBye!")
+            break
 
-    if prompt.lower() in {"exit", "quit"}:
-        print("Bye!")
-        break
+        if prompt.lower() in {"exit", "quit"}:
+            print("Bye!")
+            break
 
-    if not prompt:
-        continue
+        if not prompt:
+            continue
 
-    if len(prompt) < 3:
-        print("Tenvor: Please enter a longer prompt (at least 3 characters).")
-        continue
+        if len(prompt) < 3:
+            print("Tenvor: Please enter a longer prompt (at least 3 characters).")
+            continue
 
-    print("Tenvor:", generate(prompt))
+        print("Tenvor:", generate(prompt))
