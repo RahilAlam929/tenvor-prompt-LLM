@@ -26,7 +26,10 @@ model = TenvorLM(
 model.load_state_dict(checkpoint["model_state_dict"])
 model.eval()
 
-def generate(prompt, max_new_tokens=80, temperature=0.8, top_k=20, repetition_penalty=1.2):
+def generate(prompt, max_new_tokens=80, temperature=0.8, top_k=20, repetition_penalty=1.2, seed=None):
+    if seed is not None:
+        torch.manual_seed(seed)
+
     ids = tokenizer.encode(prompt).ids
     if not ids:
         return ""
