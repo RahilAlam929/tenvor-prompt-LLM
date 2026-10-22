@@ -26,7 +26,7 @@ model = TenvorLM(
 model.load_state_dict(checkpoint["model_state_dict"])
 model.eval()
 
-def generate(prompt, max_new_tokens=80, temperature=0.8, top_k=20):
+def generate(prompt, max_new_tokens=80, temperature=0.8, top_k=20, repetition_penalty=1.2):
     ids = tokenizer.encode(prompt).ids
     if not ids:
         return ""
@@ -43,7 +43,7 @@ def generate(prompt, max_new_tokens=80, temperature=0.8, top_k=20):
             logits = model(context)[0, -1, :].clone()
 
             for token_id in set(new_tokens[-32:]):
-                logits[token_id] /= 1.2
+                logits[token_id] /= max(repetition_penalty, 1.0)
 
             logits /= max(temperature, 0.1)
             k = min(top_k, logits.numel())
