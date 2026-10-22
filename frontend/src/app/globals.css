@@ -24,3 +24,210 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+/* Tenvor light theme: overrides only; existing dark theme stays the default. */
+main[data-theme="light"] {
+  background: #f7f8fc !important;
+  color: #171923 !important;
+  color-scheme: light;
+}
+main[data-theme="light"] aside {
+  background: #ffffff !important;
+  border-color: #e5e7eb !important;
+}
+main[data-theme="light"] header {
+  border-color: #e5e7eb !important;
+}
+main[data-theme="light"] [class~="bg-[#121620]"],
+main[data-theme="light"] [class~="bg-[#141823]"],
+main[data-theme="light"] [class~="bg-[#191e2a]"] {
+  background: #ffffff !important;
+  color: #171923 !important;
+}
+main[data-theme="light"] [class~="border-white/10"],
+main[data-theme="light"] [class~="border-white/[0.07]"],
+main[data-theme="light"] [class~="border-white/[0.08]"],
+main[data-theme="light"] [class~="border-white/[0.09]"],
+main[data-theme="light"] [class~="border-white/[0.12]"] {
+  border-color: #e1e5ed !important;
+}
+main[data-theme="light"] [class~="text-slate-200"],
+main[data-theme="light"] [class~="text-slate-300"] {
+  color: #303747 !important;
+}
+main[data-theme="light"] [class~="text-slate-400"],
+main[data-theme="light"] [class~="text-slate-500"] {
+  color: #687184 !important;
+}
+main[data-theme="light"] [class~="text-slate-600"] {
+  color: #7b8496 !important;
+}
+main[data-theme="light"] [class~="bg-white/[0.025]"],
+main[data-theme="light"] [class~="bg-white/[0.035]"],
+main[data-theme="light"] [class~="bg-white/[0.04]"] {
+  background: #f1f3f8 !important;
+}
+main[data-theme="light"] textarea {
+  color: #171923 !important;
+}
+main[data-theme="light"] select {
+  background: #ffffff !important;
+  color: #171923 !important;
+  border-color: #d8dce6 !important;
+}
+main[data-theme="light"] option {
+  background: #ffffff;
+  color: #171923;
+}
+main[data-theme="light"] button:hover {
+  border-color: #c7cbe0;
+}
+
+
+
+/* Tenvor Prompt — ChatGPT-inspired UI polish. No framework or dependency changes. */
+:root {
+  --tenvor-bg: #212121;
+  --tenvor-sidebar: #171717;
+  --tenvor-panel: #2f2f2f;
+  --tenvor-panel-hover: #383838;
+  --tenvor-border: #3a3a3a;
+  --tenvor-text: #ececec;
+  --tenvor-muted: #a0a0a0;
+  --tenvor-accent: #b6a5ff;
+}
+
+main[data-theme="dark"] {
+  background: var(--tenvor-bg) !important;
+  color: var(--tenvor-text) !important;
+  color-scheme: dark;
+}
+main[data-theme="dark"] aside {
+  background: var(--tenvor-sidebar) !important;
+  border-color: transparent !important;
+}
+main[data-theme="dark"] header {
+  background: var(--tenvor-bg) !important;
+  border-color: transparent !important;
+}
+main[data-theme="dark"] textarea,
+main[data-theme="dark"] input,
+main[data-theme="dark"] select {
+  color: var(--tenvor-text) !important;
+}
+main[data-theme="dark"] textarea {
+  background: transparent !important;
+}
+main[data-theme="dark"] button {
+  transition: background-color .16s ease, border-color .16s ease, color .16s ease, transform .16s ease;
+}
+main[data-theme="dark"] button:hover {
+  border-color: #555 !important;
+}
+main[data-theme="dark"] [class*="bg-[#090b10]"],
+main[data-theme="dark"] [class*="bg-[#0d1017]"],
+main[data-theme="dark"] [class*="bg-[#121620]"],
+main[data-theme="dark"] [class*="bg-[#141823]"],
+main[data-theme="dark"] [class*="bg-[#191e2a]"] {
+  background: var(--tenvor-bg) !important;
+}
+main[data-theme="dark"] [class*="border-white/"] {
+  border-color: var(--tenvor-border) !important;
+}
+main[data-theme="dark"] [class*="text-slate-500"],
+main[data-theme="dark"] [class*="text-slate-400"] {
+  color: var(--tenvor-muted) !important;
+}
+main[data-theme="dark"] [class*="rounded-2xl"],
+main[data-theme="dark"] [class*="rounded-xl"] {
+  border-radius: 1rem;
+}
+main[data-theme="dark"] textarea:focus,
+main[data-theme="dark"] input:focus,
+main[data-theme="dark"] select:focus {
+  outline-color: #777 !important;
+}
+
+/* Light mode: consistent neutral surfaces and readable contrast. */
+main[data-theme="light"] {
+  background: #ffffff !important;
+  color: #202123 !important;
+  color-scheme: light;
+}
+main[data-theme="light"] aside {
+  background: #f9f9f9 !important;
+  color: #202123 !important;
+  border-color: #e5e5e5 !important;
+}
+main[data-theme="light"] header {
+  background: #ffffff !important;
+  color: #202123 !important;
+  border-color: #ededed !important;
+}
+main[data-theme="light"] [class*="bg-[#090b10]"],
+main[data-theme="light"] [class*="bg-[#0d1017]"],
+main[data-theme="light"] [class*="bg-[#121620]"],
+main[data-theme="light"] [class*="bg-[#141823]"],
+main[data-theme="light"] [class*="bg-[#191e2a]"],
+main[data-theme="light"] [class*="bg-[#202633]"],
+main[data-theme="light"] [class*="bg-[#252b38]"] {
+  background: #ffffff !important;
+  color: #202123 !important;
+}
+main[data-theme="light"] [class*="border-white/"],
+main[data-theme="light"] [class*="border-slate-700"] {
+  border-color: #e5e5e5 !important;
+}
+main[data-theme="light"] [class*="text-white"],
+main[data-theme="light"] [class*="text-slate-100"],
+main[data-theme="light"] [class*="text-slate-200"],
+main[data-theme="light"] [class*="text-slate-300"] {
+  color: #202123 !important;
+}
+main[data-theme="light"] [class*="text-slate-400"],
+main[data-theme="light"] [class*="text-slate-500"],
+main[data-theme="light"] [class*="text-slate-600"] {
+  color: #6b6b6b !important;
+}
+main[data-theme="light"] [class*="bg-white/[0.025]"],
+main[data-theme="light"] [class*="bg-white/[0.035]"],
+main[data-theme="light"] [class*="bg-white/[0.04]"],
+main[data-theme="light"] [class*="bg-white/[0.05]"] {
+  background: #f4f4f4 !important;
+}
+main[data-theme="light"] textarea,
+main[data-theme="light"] input,
+main[data-theme="light"] select {
+  color: #202123 !important;
+  background-color: transparent !important;
+}
+main[data-theme="light"] select option {
+  background: #fff !important;
+  color: #202123 !important;
+}
+main[data-theme="light"] button:hover {
+  background-color: #eeeeee !important;
+}
+main[data-theme="light"] button[class*="bg-violet"],
+main[data-theme="light"] button[class*="bg-indigo"] {
+  color: #fff !important;
+}
+
+/* Shared polish */
+main aside,
+main header,
+main textarea,
+main button,
+main select {
+  -webkit-tap-highlight-color: transparent;
+}
+main button:focus-visible,
+main textarea:focus-visible,
+main select:focus-visible {
+  outline: 2px solid #8d7be8;
+  outline-offset: 2px;
+}
+main ::-webkit-scrollbar { width: 8px; height: 8px; }
+main ::-webkit-scrollbar-thumb { background: #7776; border-radius: 8px; }
+main ::-webkit-scrollbar-thumb:hover { background: #888a; }

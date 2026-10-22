@@ -2,6 +2,7 @@ from pathlib import Path
 import torch
 from tokenizers import Tokenizer
 from model import TenvorLM
+from chat_history import save_message
 
 ROOT = Path(__file__).resolve().parents[1]
 device = torch.device("cpu")
@@ -89,4 +90,9 @@ if __name__ == "__main__":
             print("Tenvor: Please enter a longer prompt (at least 3 characters).")
             continue
 
-        print("Tenvor:", generate(prompt))
+        response = generate(prompt)
+        print("Tenvor:", response)
+        try:
+            save_message(prompt, response)
+        except OSError as error:
+            print(f"Warning: Could not save chat history: {error}")

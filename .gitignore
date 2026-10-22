@@ -48,3 +48,37 @@ training/checkpoints/
 training/data/*.backup.txt
 training/backups/
 .DS_Store
+
+# Private local chat history
+training/data/chat_history.jsonl
+
+# Local backups and generated archives
+*.backup
+*.backup-*
+*.before-auth-ui
+*.before-google-login
+*.google-ui-backup
+*.pre-lint-fix
+tenvor-premium-frontend.zip
+
+# Python environment files
+.env
+.env.*
+!.env.example
+
+# Private local chat history
+training/data/chat_history.jsonl
+
+# Local backups and archives
+*.backup
+*.backup-*
+*.before-auth-ui
+*.before-google-login
+*.google-ui-backup
+*.pre-lint-fix
+tenvor-premium-frontend.zip
+
+# Local environment secrets
+.env
+.env.*
+!.env.example

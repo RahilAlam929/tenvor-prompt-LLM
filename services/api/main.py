@@ -246,3 +246,125 @@ Always respond to the latest user message, not with a generic greeting.
         system=system,
         user=request.message,
     ).model_dump()
+
+
+# Persistent chat workspace
+from services.api import chat_store
+
+
+class ConversationCreateRequest(BaseModel):
+    title: str = Field(default="New chat", min_length=1, max_length=120)
+
+
+class ConversationRenameRequest(BaseModel):
+    title: str = Field(min_length=1, max_length=120)
+
+
+class ConversationChatRequest(BaseModel):
+    message: str = Field(min_length=1, max_length=10000)
+    provider: str = "ollama"
+    model: str = "llama3.2:3b"
+
+
+@app.get("/v1/conversations")
+def conversations_list():
+    return {"conversations": chat_store.list_conversations()}
+
+
+@app.post("/v1/conversations")
+def conversations_create(request: ConversationCreateRequest):
+    return chat_store.create_conversation(request.title)
+
+
+@app.get("/v1/conversations/{conversation_id}")
+def conversation_get(conversation_id: str):
+    conversation = chat_store.get_conversation(conversation_id)
+    if conversation is None:
+        raise HTTPException(status_code=404, detail="Conversation not found")
+    return conversation
+
+
+@app.patch("/v1/conversations/{conversation_id}")
+def conversation_rename(
+    conversation_id: str,
+    request: ConversationRenameRequest,
+):
+    conversation = chat_store.rename_conversation(
+        conversation_id, request.title
+    )
+    if conversation is None:
+        raise HTTPException(status_code=404, detail="Conversation not found")
+    return conversation
+
+
+@app.delete("/v1/conversations/{conversation_id}")
+def conversation_delete(conversation_id: str):
+    if not chat_store.delete_conversation(conversation_id):
+        raise HTTPException(status_code=404, detail="Conversation not found")
+    return {"deleted": True, "id": conversation_id}
+
+
+@app.post("/v1/conversations/{conversation_id}/chat")
+def conversation_chat(
+    conversation_id: str,
+    request: ConversationChatRequest,
+):
+    conversation = chat_store.get_conversation(conversation_id)
+    if conversation is None:
+        raise HTTPException(status_code=404, detail="Conversation not found")
+
+    message = request.message.strip()
+    if not message:
+        raise HTTPException(status_code=422, detail="Message cannot be empty")
+
+    user_message = chat_store.add_message(
+        conversation_id,
+        role="user",
+        content=message,
+    )
+
+    system = """
+You are Tenvor AI, a capable and practical AI assistant.
+
+Answer the user's actual question directly. For coding tasks, give runnable
+code and execution instructions. Explain concepts in simple Hinglish when
+the user uses Hinglish. Do not invent facts, test results, or capabilities.
+State uncertainty and limitations clearly.
+"""
+
+    # Include recent conversation history for providers that support it.
+    recent_messages = conversation["messages"][-12:]
+    if request.provider.strip().lower() != "tenvor" and recent_messages:
+        history = "\\n".join(
+            f"{item['role'].upper()}: {item['content']}"
+            for item in recent_messages
+        )
+        user_prompt = (
+            f"Previous conversation:\\n{history}\\n\\n"
+            f"CURRENT USER MESSAGE:\\n{message}"
+        )
+    else:
+        user_prompt = message
+
+    result = run_ai(
+        provider=request.provider,
+        model=request.model,
+        system=system,
+        user=user_prompt,
+    )
+
+    assistant_message = chat_store.add_message(
+        conversation_id,
+        role="assistant",
+        content=result.result,
+        provider=result.provider,
+        model=result.model,
+    )
+
+    return {
+        "conversation_id": conversation_id,
+        "user_message": user_message,
+        "assistant_message": assistant_message,
+        "provider": result.provider,
+        "model": result.model,
+    }

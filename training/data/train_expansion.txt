@@ -1,0 +1,69 @@
+A good decision begins with a clear understanding of the problem.
+People learn new skills through practice, feedback, and patience.
+A budget helps a person compare income with planned expenses.
+Saving money regularly can help prepare for unexpected costs.
+A business creates value by solving problems for its customers.
+Customer feedback can reveal weaknesses in a product.
+An entrepreneur tests assumptions before investing heavily in an idea.
+A team works better when responsibilities are clearly defined.
+A project plan divides a large goal into smaller tasks.
+Deadlines help teams organize their time and track progress.
+Clear writing makes complex information easier to understand.
+Reading every day can improve vocabulary and comprehension.
+A question can have several possible answers depending on its context.
+An experiment tests an idea through observation and measurement.
+A scientific theory should be evaluated using available evidence.
+Weather forecasts use observations and models to estimate future conditions.
+Plants need suitable light, water, nutrients, and temperature to grow.
+The water cycle moves water between the atmosphere and Earth's surface.
+Gravity attracts objects with mass toward one another.
+Sound travels through a medium as vibrations.
+Light can travel through a vacuum.
+Electric current flows when a suitable circuit provides a path.
+A computer processor executes instructions to perform calculations.
+Memory stores data that a computer needs during a task.
+An operating system manages hardware and software resources.
+A file system organizes files and directories.
+A variable gives a name to a value in a program.
+A loop repeats a block of instructions.
+A conditional statement selects an action based on a condition.
+An algorithm describes steps for solving a problem.
+A data structure organizes information for efficient access.
+A stack follows the last in, first out principle.
+A queue usually processes items in the order they arrive.
+A hash table uses a key to locate a stored value.
+A test checks whether software behaves as expected.
+A bug is an error that causes unexpected behavior.
+Debugging involves finding and correcting the cause of a problem.
+Version control helps developers review and manage code changes.
+A secure password should be difficult for others to guess.
+Encryption transforms information so that it cannot be read easily without the required key.
+An internet connection allows devices to exchange data.
+A web page may contain text, images, links, and interactive elements.
+A search engine helps users find relevant information online.
+A database query retrieves or modifies stored information.
+An application programming interface defines how software components communicate.
+Cloud computing provides computing resources over a network.
+A backup should be tested to confirm that files can be restored.
+A good user interface makes common actions easy to discover.
+Accessibility helps people with different abilities use digital products.
+A prototype allows a team to test an idea before building the full product.
+Useful measurements help people compare results objectively.
+A graph can reveal patterns that are difficult to notice in a list of numbers.
+The average describes a central value but can be affected by extreme observations.
+The median is the middle value after observations are sorted.
+A correlation does not by itself prove that one event causes another.
+A larger dataset does not automatically guarantee better conclusions.
+Training data and evaluation data should be kept separate.
+A model should be evaluated on examples it did not train on.
+A random seed can help make an experiment reproducible.
+A learning rate controls the size of parameter updates during training.
+A neural network learns patterns by adjusting its parameters.
+An optimizer uses gradients to update model parameters.
+A tokenizer converts text into units that a language model can process.
+A language model can generate text by repeatedly predicting the next token.
+Generated text can sound confident while still containing mistakes.
+Human review is important when model outputs affect important decisions.
+A useful assistant should explain uncertainty when evidence is limited.
+Good documentation explains how to install, use, and maintain a project.
+Small improvements become valuable when they are tested consistently.

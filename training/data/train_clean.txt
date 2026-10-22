@@ -1,0 +1,146 @@
+A language model predicts the next token based on previous tokens.
+Artificial intelligence enables computers to perform tasks that normally require human intelligence.
+Machine learning systems discover patterns from examples.
+Deep learning uses neural networks with multiple layers.
+Training adjusts model weights to reduce prediction error.
+A transformer uses attention to process sequences of tokens.
+Self attention helps a token use information from earlier tokens.
+Causal language models predict future tokens without looking at them.
+Embeddings represent tokens as vectors of numbers.
+Position embeddings provide information about token order.
+The optimizer updates parameters using gradients calculated from the loss.
+Training loss measures errors on examples used during optimization.
+A checkpoint saves model parameters for later use.
+A good experiment records settings and random seeds.
+Data quality strongly influences machine learning results.
+Small datasets can cause models to memorize examples.
+Software engineers build reliable and maintainable applications.
+Python is widely used for artificial intelligence research.
+Functions organize code into reusable units.
+Classes combine data and behavior into objects.
+Git tracks changes in source code.
+A database stores information in an organized format.
+An API allows software systems to communicate.
+A server receives requests and returns responses.
+A language model needs enough diverse examples to learn useful patterns.
+Training from scratch begins with randomly initialized model weights.
+A pretrained model has already learned patterns from another dataset.
+Tenvor does not use pretrained weights in this experiment.
+Its purpose is to demonstrate tokenization and transformer training.
+The next goal is to improve data quality and evaluation.
+Machine learning experiments should be repeatable.
+Researchers compare models using appropriate evaluation metrics.
+A model can generate incorrect or meaningless sentences.
+Generated text should be evaluated rather than assumed to be correct.
+A computer program is a sequence of instructions that a machine can execute.
+An algorithm describes a method for solving a problem.
+A good algorithm should be correct, understandable, and efficient.
+Time complexity describes how an algorithm's running time grows with input size.
+Space complexity describes how much additional memory an algorithm uses.
+An array stores elements in an ordered sequence.
+A linked list connects elements through references to other elements.
+A stack follows the last in first out principle.
+A queue follows the first in first out principle.
+A hash table stores values using keys.
+A tree represents hierarchical relationships between nodes.
+A graph represents connections between vertices.
+Sorting arranges elements according to a defined order.
+Binary search repeatedly reduces the search interval by half.
+Recursion solves a problem by calling a function on smaller problems.
+A base case prevents a recursive function from continuing forever.
+Testing checks whether software behaves as expected.
+Debugging helps developers locate and correct defects.
+A useful error message explains what failed and where it happened.
+Version control allows developers to review changes over time.
+A commit records a logical group of changes.
+A branch supports development without immediately changing the main branch.
+A pull request allows other developers to review proposed changes.
+Documentation explains how a system works and how to use it.
+Python uses indentation to define blocks of code.
+A variable refers to a value used by a program.
+A string represents text.
+An integer represents a whole number.
+A Boolean value is either true or false.
+A list can contain multiple values in a specific order.
+A dictionary maps keys to values.
+A loop repeats a block of instructions.
+A conditional statement selects behavior based on a condition.
+A function can accept inputs and return a result.
+An exception represents an error or unusual condition during execution.
+A module groups related Python definitions.
+A package organizes modules into a reusable structure.
+A virtual environment isolates project dependencies.
+A dependency is software that another program relies on.
+A unit test checks a small part of a program.
+An integration test checks whether multiple components work together.
+Readable code reduces the effort required for maintenance.
+Small functions are often easier to test than large functions.
+Clear names help programmers understand the purpose of a variable.
+Input validation prevents many avoidable errors.
+A secure application treats external input as untrusted.
+A database query retrieves or modifies stored information.
+SQL can filter rows, group results, and combine tables.
+An index can speed up database queries.
+A transaction groups database operations into one logical unit.
+An API defines how one software component communicates with another.
+An HTTP request can include a method, headers, and a body.
+A server may return data together with a status code.
+JSON is a common format for exchanging structured data.
+A cache stores reusable results to reduce repeated work.
+Machine learning uses data to learn patterns for a particular task.
+A supervised learning example contains inputs and target labels.
+Classification predicts a category.
+Regression predicts a numerical value.
+Clustering groups examples according to similarities.
+A feature is an input variable used by a model.
+A label is the target that a supervised model learns to predict.
+A training set is used to optimize model parameters.
+A validation set helps compare experiments and detect overfitting.
+A test set estimates performance on data reserved for final evaluation.
+Data leakage occurs when information unavailable at prediction time influences training.
+Overfitting happens when a model learns training examples too specifically.
+Underfitting occurs when a model cannot capture important patterns.
+Regularization can discourage unnecessarily complex solutions.
+Learning rate controls the size of optimizer updates.
+A gradient describes how a quantity changes with respect to parameters.
+Gradient descent adjusts parameters to reduce an objective function.
+A loss function measures prediction error during training.
+Accuracy is the fraction of predictions that are correct.
+Precision measures the fraction of predicted positives that are true positives.
+Recall measures the fraction of actual positives that are detected.
+A confusion matrix summarizes classification outcomes.
+Evaluation metrics should match the problem being solved.
+A random seed can make some experiments more reproducible.
+Reproducibility also requires recording data and software settings.
+A neural network contains layers of connected mathematical operations.
+Each trainable parameter can influence the network's predictions.
+An activation function introduces nonlinearity into a neural network.
+A tensor is a multidimensional array of values.
+A batch contains several training examples processed together.
+An epoch is one pass through the training dataset.
+A batch size determines how many examples are processed at once.
+Backpropagation computes gradients through a network.
+An optimizer uses gradients to update parameters.
+The training loop repeatedly calculates predictions, loss, and parameter updates.
+The evaluation loop measures performance without updating model weights.
+A checkpoint can preserve model weights and training configuration.
+A tokenizer maps text into token identifiers.
+A vocabulary defines the tokens a tokenizer recognizes.
+Subword tokenization can represent uncommon words using smaller units.
+A token embedding maps each token identifier to a vector.
+Positional information helps a model distinguish token order.
+Attention combines information from different positions in a sequence.
+A causal attention mask prevents a token from accessing future positions.
+A transformer block commonly includes attention and a feed-forward network.
+Layer normalization helps stabilize activations.
+A language model estimates the next token from previous context.
+Autoregressive generation repeatedly predicts and appends another token.
+Temperature changes the sharpness of a sampling distribution.
+Top-k sampling limits candidate tokens to the highest-scoring choices.
+A repetition penalty can discourage repeatedly generating the same tokens.
+An end-of-sequence token can signal that generation should stop.
+Generated text may still be inaccurate even when it sounds fluent.
+A small language model is useful for learning about model internals.
+Training from scratch begins with randomly initialized parameters.
+More training steps cannot replace missing or unrepresentative training data.
+A diverse corpus provides a wider range of linguistic patterns.
