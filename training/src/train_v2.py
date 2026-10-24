@@ -58,16 +58,24 @@ def evaluate():
     result = {}
 
     for name, source in (("train", train_data), ("val", val_data)):
-        losses = []
-        for _ in range(5):
-            x, y = get_batch(source)
+        total_loss = 0.0
+        total_tokens = 0
+
+        for start in range(0, len(source) - seq_len, seq_len):
+            x = source[start:start + seq_len].unsqueeze(0).to(device)
+            y = source[start + 1:start + seq_len + 1].unsqueeze(0).to(device)
+
             logits = model(x)
             loss = F.cross_entropy(
                 logits.reshape(-1, logits.size(-1)),
                 y.reshape(-1),
+                reduction="sum",
             )
-            losses.append(loss.item())
-        result[name] = sum(losses) / len(losses)
+
+            total_loss += loss.item()
+            total_tokens += y.numel()
+
+        result[name] = total_loss / total_tokens
 
     model.train()
     return result
@@ -123,4 +131,4 @@ for step in range(1, steps + 1):
                 break
 
 print(f"\nBest validation loss: {best_val_loss:.4f}")
-print("Checkpoint: checkpoints/tenvor-best.pt")
+print("Checkpoint: checkpoints/tenvor-v2-best.pt")
